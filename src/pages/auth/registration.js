@@ -42,6 +42,7 @@ const  Registration = (props) => {
             const response = await login({phone,password})
             if (response === true) {
                 setMessage('Login Successful');
+                navigate('/Dashboard');
                 setError(false);
             } else {
                 setMessage('Login Failed! invalid Credentials');

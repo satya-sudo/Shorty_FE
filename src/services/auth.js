@@ -23,15 +23,15 @@ export const login = async (data) => {
 
 
 export const getToken = () => {    
-    return localStorage.getItem('token');
+    return localStorage.getItem('ACCESSTOKENVALUE');
 }
 
 export const setToken = (token) => {
-    localStorage.setItem('token', token);
+    localStorage.setItem('ACCESSTOKENVALUE', token);
 }
 
 export const removeToken = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('ACCESSTOKENVALUE');
     return true
 }
 

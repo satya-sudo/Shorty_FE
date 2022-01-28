@@ -3,11 +3,13 @@ import {
     getToken
 } from "../services/auth";
 
-const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${getToken()}`
-  }
+  
 export const shorten = async (data) => {
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${getToken()}`
+      }
     const response = await shortyApi.post('/api/url/', data,
     { headers: headers
     })

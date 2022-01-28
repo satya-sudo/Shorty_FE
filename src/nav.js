@@ -11,7 +11,7 @@ const Nav = () => {
  
     useEffect(() => {
         setToken(getToken());
-    },[token])
+    })
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light ">

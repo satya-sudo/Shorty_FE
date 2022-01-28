@@ -1,65 +1,52 @@
 import React,{ useState, useEffect } from 'react';
-import { getToken } from '../../services/auth';
+import { getToken,removeToken } from '../../services/auth';
 import { useNavigate } from 'react-router-dom';
-import BarChart from './Chart';
-
+// import Donutchart from './Chart';
+import ApexCharts from './Chart';
 import { shorten } from '../../services/shortner';
 
-const datas = [
 
-    [10, 80, 40, 20],
+// const label = ['office', 'Entertainment', 'facebook', 'Instagram', 'twitter','others']
 
-    [10, 40, 30, 20, 50, 10],
+const Pserise  =  [44, 55, 13, 43, 22,77]
 
-    [10, 40, 30, 20, 20, 10],
-
-    [10, 40, 20, 50, 10],
-
-    [10, 20, 50, 10],
-
-    [60, 30, 40, 20, 30],
-
-];
-
-var i = 0;
 
 const Dashboard = () => {
 
     let navigate = useNavigate();
+
+
+    // Storty service data
+    const [url,setUrl] = useState();
+    const [shortUrl,setShortUrl] = useState("");
+    const [tag,setTag] = useState();
+
+    // Error states
+    const [error,setError] = useState(false);
+    const [message,setMessage] = useState();
+    const [messageApi,setMessageApi] = useState();
+
+    // Chart data
+    const [serise,setSerise] = useState(Pserise);
+
+
+
+    useEffect(() => {
+        setSerise(Pserise);
+        console.log(serise,"serise");
+    },[serise]);
+
+
     useEffect(() => {
         if(!getToken()){
               navigate('/registeration');
         }
     },[navigate])
-    const [data, setData] = useState([]);
 
-
-    useEffect(() => {
-
-        changeData();
-
-    }, []);
-
-
-    const changeData = () => {
-
-        setData(datas[i++]);
-
-        if(i === datas.length) i = 0;
-
-    }
-
-
-    const [url,setUrl] = useState();
-    const [shortUrl,setShortUrl] = useState("");
-    const [tag,setTag] = useState();
-
-    const [error,setError] = useState(false);
-    const [message,setMessage] = useState();
-    const [messageApi,setMessageApi] = useState();
 
     const handleSubmit = async () => {
 
+        // form validatiom
         if (!url) {
             setMessage('Please enter a valid URL');
             setError(true);
@@ -73,6 +60,7 @@ const Dashboard = () => {
 
         const response = await shorten({ url, tag });
 
+        // response from api
         if (response.status === 201 ){
             setMessage("Here is the shorten url");
             setShortUrl(response.data.id);
@@ -80,32 +68,31 @@ const Dashboard = () => {
             setMessage("Something Went Wrong! ");
             setError(true);
         } else if (response.status === 401) {
-            setMessage("token expired");
-            setError(true);
+            removeToken();
+            navigate('/registration');
         }
 
     }
 
+
+    // copy to clipboard functions
     const handleClickToCopy = () => {
         if (shortUrl) {
             navigator.clipboard.writeText(shortUrl);
             setError(false);
             setMessage('Copied to clipboard');
         }
-        
-
     }
 
     const handleCopy = () => {
         navigator.clipboard.writeText(getToken());
         setMessageApi('Api Key Copied to clipboard');
     }
-
-
             
     return (
         <div className="container dashboard">
             <div className="d-flex align-content-center flex-wrap justify-content-center" >
+
                 <div className="card bg-light  cardWrapper"> 
                     <div className="card-body">
                     
@@ -125,6 +112,7 @@ const Dashboard = () => {
                         <button className="btn btn-outline-primary btn-block" onClick={() => handleSubmit() }>Short</button>
                     </div>
                 </div>
+
                 <div className="card bg-light ApiKeyWrapper">
                     <div className="card-body">
                     {messageApi && <div className="alert alert-primary">{messageApi}</div>}
@@ -140,9 +128,33 @@ const Dashboard = () => {
 
                     </div>
                 </div>
-                <BarChart width={600} height={400} data={data} />
+            </div>
+
+            <div className="row">
+                <div className="col-md-8">
+                        <div className="card bg-light NoboarderCard">
+                            <div className="card-body p-4">
+                            <ApexCharts series={serise}/>
+                            </div>
+                        </div>
+                
+                </div>
+                <div className="col-md-4">
+                <div className="card bg-light NoboarderCard">
+
+                    <div className="text-center card-body">
+                        
+                        <h4 className="text-primary">0</h4>
+                        <h4>Total Urls</h4>
+                        
+                        <h4 className="text-primary">22</h4>
+                        <h4>Total Visits</h4>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    
     );
 };
 

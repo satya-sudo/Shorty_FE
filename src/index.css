@@ -24,6 +24,10 @@ body{
   min-width: 50vw;
   margin: 30px !important;
 }
+.NoboarderCard {
+  border: 0px !important;
+}
+
 .ApiKeyWrapper {
   border: 0px !important;
   min-width: 50vw;
