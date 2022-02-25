@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import ApexCharts from './Chart';
 import { shorten } from '../../services/shortner';
 
+import {stats} from  '../../services/stats';
+
 
 // const label = ['office', 'Entertainment', 'facebook', 'Instagram', 'twitter','others']
 
@@ -14,8 +16,6 @@ const Pserise  =  [44, 55, 13, 43, 22,77]
 const Dashboard = () => {
 
     let navigate = useNavigate();
-
-
     // Storty service data
     const [url,setUrl] = useState();
     const [shortUrl,setShortUrl] = useState("");
@@ -27,14 +27,35 @@ const Dashboard = () => {
     const [messageApi,setMessageApi] = useState();
 
     // Chart data
-    const [serise,setSerise] = useState(Pserise);
+    const [serise,setSerise] = useState([]);
 
+    const [labels,setLabels] = useState([])
+
+    const [totalUrls,setTotalUrls] = useState(0);
+    const [totalClicks,setTotalClicks] = useState(0);
 
 
     useEffect(() => {
-        setSerise(Pserise);
+
+        
+        fetchData();
         console.log(serise,"serise");
-    },[serise]);
+    },[]);
+
+    const fetchData = async () => {
+        const response = await stats();
+        if(response.status === 200){
+            setSerise(response.data.visits);
+            setTotalUrls(response.data.total_urls);
+            setTotalClicks(response.data.total_visits);
+            setLabels(response.data.tags);
+            console.log(response.data);
+        } else if (response.status === 401){
+            removeToken();
+            navigate('/registration');
+        }
+        return response;
+    };
 
 
     useEffect(() => {
@@ -134,7 +155,8 @@ const Dashboard = () => {
                 <div className="col-md-8">
                         <div className="card bg-light NoboarderCard">
                             <div className="card-body p-4">
-                            <ApexCharts series={serise}/>
+                                {serise.length > 0 ? <ApexCharts series={serise}  labels={labels} /> : null  }
+                           
                             </div>
                         </div>
                 
@@ -144,10 +166,10 @@ const Dashboard = () => {
 
                     <div className="text-center card-body">
                         
-                        <h4 className="text-primary">0</h4>
+                        <h4 className="text-primary">{totalUrls}</h4>
                         <h4>Total Urls</h4>
                         
-                        <h4 className="text-primary">22</h4>
+                        <h4 className="text-primary">{totalClicks}</h4>
                         <h4>Total Visits</h4>
                     </div>
                 </div>

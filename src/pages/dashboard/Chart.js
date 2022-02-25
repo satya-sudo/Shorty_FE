@@ -13,7 +13,7 @@ class ApexChart extends React.Component {
             width: 300,
             type: 'pie',
           },
-          labels: ['office', 'Entertainment', 'facebook', 'Instagram', 'twitter','others'],
+          // labels: ['office', 'Entertainment', 'facebook', 'Instagram', 'twitter','others'],
           responsive: [{
             breakpoint: 480,
             options: {
@@ -33,9 +33,10 @@ class ApexChart extends React.Component {
 
 
     componentDidMount() {
-        console.log(this.props.series)
+        // console.log(this.props.series)
         this.setState({
-            series:this.props.series
+            series:this.props.series,
+            options:{...this.state.options,labels:this.props.labels}
         })
         console.log(this.state)
     }
