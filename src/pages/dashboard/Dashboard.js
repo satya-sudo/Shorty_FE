@@ -155,7 +155,7 @@ const Dashboard = () => {
                 <div className="col-md-8">
                         <div className="card bg-light NoboarderCard">
                             <div className="card-body p-4">
-                                {serise.length > 0 ? <ApexCharts series={serise}  labels={labels} /> : null  }
+                                {serise.length >0  && labels.length > 0 ? <ApexCharts series={serise}  labels={labels} /> : null  }
                            
                             </div>
                         </div>

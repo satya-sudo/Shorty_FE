@@ -32,12 +32,19 @@ class ApexChart extends React.Component {
     }
 
 
-    componentDidMount() {
-        // console.log(this.props.series)
+    componentWillMount() {
+        console.log(this.props.labels)
+
         this.setState({
             series:this.props.series,
             options:{...this.state.options,labels:this.props.labels}
         })
+        this.setState(
+            {
+              options : { ...this.state.options, labels: this.props.labels }
+            }
+        )
+        console.log(this.props.labels)
         console.log(this.state)
     }
 

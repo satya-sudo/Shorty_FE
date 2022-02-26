@@ -2,7 +2,7 @@ body{
   min-height: 100vh;
   min-width: 100vw;
   font-family: 'Anton', sans-serif;
-
+  border-radius: 0px !important;
 }
 
 .headWrapper {
@@ -23,8 +23,10 @@ body{
   border: 0px !important;
   min-width: 50vw;
   margin: 30px !important;
+
 }
 .NoboarderCard {
+  /* box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; */
   border: 0px !important;
 }
 
@@ -36,4 +38,16 @@ body{
 
 .copy {
   cursor: pointer !important;
+}
+
+@media (max-width: 768px) {
+  .Step_1_body ,.Step_2_body {
+    padding-left: 50px !important ;
+  }
+}
+
+@media (min-width: 768px) {
+  .Step_1_body,.Step_2_body  {
+    padding-left: 120px !important ;
+  }
 }
