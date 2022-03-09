@@ -111,7 +111,7 @@ const Dashboard = () => {
     }
             
     return (
-        <div className="container dashboard">
+        <div className="container dashboard dashBoard">
             <div className="d-flex align-content-center flex-wrap justify-content-center" >
 
                 <div className="card bg-light  cardWrapper"> 

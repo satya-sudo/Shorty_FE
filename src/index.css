@@ -3,7 +3,41 @@ body{
   min-width: 100vw;
   font-family: 'Anton', sans-serif;
   border-radius: 0px !important;
+  animation: .5s ease-out 0s 1 slideInFromLeft;
 }
+
+
+.home {
+  animation: .5s ease-out 0s 1 slideInFromLeft;
+
+}
+
+.notFound {
+  animation: .5s ease-out 0s 1 slideInFromLeft;
+
+}
+.dashBoard {
+  animation: .5s ease-out 0s 1 slideInFromLeft;
+}
+
+.docs {
+  animation: .5s ease-out 0s 1 slideInFromLeft;
+}
+
+.register {
+  animation: .5s ease-out 0s 1 slideInFromLeft;
+
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 
 .headWrapper {
   font-family: 'Anton', sans-serif;

@@ -5,7 +5,7 @@ import logo from  '../assets/not.svg'
 const Notfound = () => {
 
     return (
-        <div className="d-flex align-content-center flex-wrap justify-content-center notfoundWrapper">
+        <div className="d-flex align-content-center flex-wrap justify-content-center notfoundWrapper notFound">
             <div className="text-center mx-6 headWrapper text-primary">
                 
                 <h1><img src={logo} alt="logo" className="logo"/>  404</h1>

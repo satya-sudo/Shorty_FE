@@ -55,7 +55,7 @@ const  Registration = (props) => {
 
 
     return (
-        <div className="d-flex align-content-center flex-wrap justify-content-center reg_form">
+        <div className="d-flex align-content-center flex-wrap justify-content-center reg_form register">
             
             <div className="card bg-light">
                 <div className="card-body">

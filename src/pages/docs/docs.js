@@ -6,7 +6,7 @@ const Docs = () => {
     const [toggle,setToggle] = useState(0);
 
     return (
-        <div  className="container">
+        <div  className="container docs">
             <div className="Header py-3">
                 <h1 className="text-capitalize text-primary">
                     How To Get Started ...
@@ -73,17 +73,17 @@ const Docs = () => {
                     Code Snippet:
                 </h2>
                 <button className="btn btn-outline-primary m-3" onClick={()=> {setToggle(0)}}>Python</button>
-                <button className="btn btn-outline-primary m-3" onClick={()=> {setToggle(1)}}>JavaScript</button>
-                <button className="btn btn-outline-primary m-3" onClick={()=> {setToggle(2)}}>Curl</button>
+                {/* <button className="btn btn-outline-primary m-3" onClick={()=> {setToggle(1)}}>JavaScript</button> */}
+                <button className="btn btn-outline-primary m-3" onClick={()=> {setToggle(1)}}>Curl</button>
                 {
                     toggle === 0 ? <Pcard /> : null
                 }
                 {
-                    toggle === 2 ? <Ccard /> : null
-                }
-                {
                     toggle === 1 ? <Ccard /> : null
                 }
+                {/* {
+                    toggle === 1 ? <Ccard /> : null
+                } */}
             </div>
 
 
